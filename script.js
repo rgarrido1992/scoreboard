@@ -11,43 +11,53 @@
 const teams = {
     'ARCANGELES': {
         name: 'ARCÁNGELES',
-        logo: 'img/ARCANGELES_ESCUDO.png'
+        logo: 'img/ARCANGELES_ESCUDO.png',
+        color: '#FFFFFF'
     },
     'BLACKPANTHERS': {
         name: 'BLACK PANTHERS',
-        logo: 'img/escudo_black_panthers.png'
+        logo: 'img/escudo_black_panthers.png',
+        color: '#030316'
     },
     'BRICKSBROTHERS': {
         name: 'BRICKS BROTHERS',
-        logo: 'img/BRICKSBROTHERS_ESCUDO.png'
+        logo: 'img/BRICKSBROTHERS_ESCUDO.png',
+        color: '#dddddd'
     },
     'EQUIPOA': {
         name: 'EQUIPO A',
-        logo: 'img/EQUIPOA_ESCUDO.png'
+        logo: 'img/EQUIPOA_ESCUDO.png',
+        color: '#d21036'
     },
     'FILOSOFOSOLIMPICOS': {
         name: 'FILÓSOFOS OLÍMPICOS',
-        logo: 'img/FILOSOFOSOLIMPICOS_ESCUDO.png'
+        logo: 'img/FILOSOFOSOLIMPICOS_ESCUDO.png',
+        color: '#eed000'
     },
     'GRANAUDITORIO': {
         name: 'GRAN AUDITORIO',
-        logo: 'img/GRANAUDITORIO_ESCUDO.png'
+        logo: 'img/GRANAUDITORIO_ESCUDO.png',
+        color: '#101010'
     },
     'MANDARINAALFA': {
         name: 'MANDARINA ALFA',
-        logo: 'img/MANDARINAALFA_ESCUDO.png'
+        logo: 'img/MANDARINAALFA_ESCUDO.png',
+        color: '#101010'
     },
     'REALSPORTICO': {
         name: 'REAL SPÓRTICO',
-        logo: 'img/REALSPORTICO_ESCUDO.png'
+        logo: 'img/REALSPORTICO_ESCUDO.png',
+        color: '#ffffff'
     },
     'THEKINGDOM': {
         name: 'THE KINGDOM',
-        logo: 'img/THEKINGDOM_ESCUDO.png'
+        logo: 'img/THEKINGDOM_ESCUDO.png',
+        color: '#006260'
     },
     'TITISTEAM': {
         name: 'TITIS TEAM',
-        logo: 'img/TITISTEAM_ESCUDO.png'
+        logo: 'img/TITISTEAM_ESCUDO.png',
+        color: '#09bddf'
     }
 };
 
@@ -214,6 +224,34 @@ function syncFromServer(serverState) {
             stopLocalTimer();
         }
     }
+
+    // Update gradient background based on team colors
+    updateGradientBackground();
+}
+
+// ========================================
+// GRADIENT BACKGROUND
+// ========================================
+
+function updateGradientBackground() {
+    const scoreboardInner = document.querySelector('.scoreboard-inner');
+    if (!scoreboardInner) return;
+
+    // Get team colors (default to center color if no team selected)
+    const centerColor = '#24243F';
+    let team1Color = centerColor;
+    let team2Color = centerColor;
+
+    if (state.team1.key && teams[state.team1.key]) {
+        team1Color = teams[state.team1.key].color;
+    }
+    if (state.team2.key && teams[state.team2.key]) {
+        team2Color = teams[state.team2.key].color;
+    }
+
+    // Apply gradient: team1 color -> center -> team2 color
+    const gradient = `linear-gradient(90deg, ${team1Color} 0%, ${centerColor} 30%, ${centerColor} 70%, ${team2Color} 100%)`;
+    scoreboardInner.style.background = gradient;
 }
 
 // ========================================
