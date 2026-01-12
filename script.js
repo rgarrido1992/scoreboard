@@ -491,7 +491,9 @@ function disableOverlayMode() {
 function updateOverlayUrl() {
     const overlayUrlEl = document.getElementById('overlay-url');
     if (overlayUrlEl) {
-        overlayUrlEl.textContent = 'http://localhost:3000?overlay=true';
+        // Use actual URL so it works on Railway, mobile, etc.
+        const baseUrl = `${window.location.protocol}//${window.location.host}`;
+        overlayUrlEl.textContent = `${baseUrl}?overlay=true`;
     }
 }
 
