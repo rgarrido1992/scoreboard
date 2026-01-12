@@ -812,6 +812,13 @@ body.overlay-mode .score {
     width: 60px;
     font-size: 3.5rem;
     font-variant-numeric: tabular-nums;
+    /* Black border/outline effect - same as team names */
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 body.overlay-mode .score-section {
