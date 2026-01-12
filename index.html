@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard Overlay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Mobile Quick Controls (visible only on mobile) -->
+    <div class="mobile-quick-controls">
+        <div class="mobile-score-controls">
+            <!-- Team 1 Mobile -->
+            <div class="mobile-team-score">
+                <span class="team-label" id="mobile-team1-name">LOCAL</span>
+                <div class="mobile-score-btns">
+                    <button class="score-btn minus" onclick="changeScore(1, -1)">−</button>
+                    <span class="score-value" id="mobile-team1-score">0</span>
+                    <button class="score-btn plus" onclick="changeScore(1, 1)">+</button>
+                </div>
+            </div>
+
+            <!-- Timer Mobile -->
+            <div class="mobile-timer">
+                <div class="timer-display" id="mobile-timer">00:00</div>
+                <div class="mobile-timer-buttons">
+                    <button class="btn-primary" onclick="startTimer()">▶</button>
+                    <button class="btn-warning" onclick="pauseTimer()">⏸</button>
+                    <button class="btn-danger" onclick="resetTimer()">↺</button>
+                </div>
+            </div>
+
+            <!-- Team 2 Mobile -->
+            <div class="mobile-team-score">
+                <span class="team-label" id="mobile-team2-name">VISITANTE</span>
+                <div class="mobile-score-btns">
+                    <button class="score-btn minus" onclick="changeScore(2, -1)">−</button>
+                    <span class="score-value" id="mobile-team2-score">0</span>
+                    <button class="score-btn plus" onclick="changeScore(2, 1)">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Control Panel (hidden in overlay mode) -->
+    <div id="control-panel" class="control-panel">
+        <h1>⚽ Scoreboard Manager</h1>
+
+        <div class="controls-grid">
+            <!-- Team 1 Controls -->
+            <div class="team-control">
+                <h2>Equipo Local</h2>
+                <div class="input-group">
+                    <label>Equipo:</label>
+                    <select id="team1-select" class="team-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="ARCANGELES">ARCÁNGELES</option>
+                        <option value="BLACKPANTHERS">BLACK PANTHERS</option>
+                        <option value="BRICKSBROTHERS">BRICKS BROTHERS</option>
+                        <option value="EQUIPOA">EQUIPO A</option>
+                        <option value="FILOSOFOSOLIMPICOS">FILÓSOFOS OLÍMPICOS</option>
+                        <option value="GRANAUDITORIO">GRAN AUDITORIO</option>
+                        <option value="MANDARINAALFA">MANDARINA ALFA</option>
+                        <option value="REALSPORTICO">REAL SPÓRTICO</option>
+                        <option value="THEKINGDOM">THE KINGDOM</option>
+                        <option value="TITISTEAM">TITIS TEAM</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Team 2 Controls -->
+            <div class="team-control">
+                <h2>Equipo Visitante</h2>
+                <div class="input-group">
+                    <label>Equipo:</label>
+                    <select id="team2-select" class="team-select">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="ARCANGELES">ARCÁNGELES</option>
+                        <option value="BLACKPANTHERS">BLACK PANTHERS</option>
+                        <option value="BRICKSBROTHERS">BRICKS BROTHERS</option>
+                        <option value="EQUIPOA">EQUIPO A</option>
+                        <option value="FILOSOFOSOLIMPICOS">FILÓSOFOS OLÍMPICOS</option>
+                        <option value="GRANAUDITORIO">GRAN AUDITORIO</option>
+                        <option value="MANDARINAALFA">MANDARINA ALFA</option>
+                        <option value="REALSPORTICO">REAL SPÓRTICO</option>
+                        <option value="THEKINGDOM">THE KINGDOM</option>
+                        <option value="TITISTEAM">TITIS TEAM</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timer Controls -->
+        <div class="timer-controls">
+            <h2>Cronómetro</h2>
+            <div class="timer-buttons">
+                <button class="btn-primary" onclick="startTimer()">▶ Iniciar</button>
+                <button class="btn-warning" onclick="pauseTimer()">⏸ Pausar</button>
+                <button class="btn-danger" onclick="resetTimer()">↺ Reiniciar</button>
+            </div>
+            <div class="input-group">
+                <label>Minutos iniciales:</label>
+                <input type="number" id="start-minutes" value="0" min="0" max="90">
+                <button class="btn-secondary" onclick="setTimer()">Aplicar</button>
+            </div>
+        </div>
+
+        <!-- Apply Changes -->
+        <div class="apply-section">
+            <button class="btn-apply" onclick="applyChanges()">✅ APLICAR CAMBIOS</button>
+        </div>
+
+        <!-- Match Controls -->
+        <div class="match-controls">
+            <h2>Controles del Partido</h2>
+            <div class="action-buttons">
+                <button class="btn-success" onclick="resetMatch()">🔄 Nuevo Partido</button>
+                <button class="btn-overlay" onclick="toggleOverlayMode()">🎬 Modo Overlay</button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instrucciones para OBS/Streamlabs:</h3>
+            <ol>
+                <li>Añade una fuente de tipo "Navegador" (Browser Source)</li>
+                <li>Introduce la URL: <code id="overlay-url">loading...</code></li>
+                <li>Activa el modo overlay o añade <code>?overlay=true</code> a la URL</li>
+                <li>Configura el ancho a 1920px y alto a 150px (ajusta según necesites)</li>
+                <li>Activa "Usar CSS personalizado" si es necesario</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Scoreboard Display -->
+    <div id="scoreboard" class="scoreboard">
+        <div class="scoreboard-inner">
+            <!-- Team 1 Name (far left) -->
+            <div class="team-name-container team-name-left">
+                <div class="team-name" id="team1-name">LOCAL</div>
+            </div>
+
+            <!-- Center Score Section: Logo1 - Score1 - Timer - Score2 - Logo2 -->
+            <div class="score-section">
+                <!-- Team 1 Logo + Score -->
+                <div class="team-logo-container">
+                    <img id="team1-logo"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23667eea' stroke='%23fff' stroke-width='3'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-family='Arial'%3E⚽%3C/text%3E%3C/svg%3E"
+                        alt="Team 1 Logo" class="team-logo">
+                </div>
+
+                <div class="score-container">
+                    <button class="score-btn minus" onclick="changeScore(1, -1)">−</button>
+                    <div class="score" id="team1-score">0</div>
+                    <button class="score-btn plus" onclick="changeScore(1, 1)">+</button>
+                </div>
+
+                <div class="timer-display" id="timer">00:00</div>
+
+                <div class="score-container">
+                    <button class="score-btn minus" onclick="changeScore(2, -1)">−</button>
+                    <div class="score" id="team2-score">0</div>
+                    <button class="score-btn plus" onclick="changeScore(2, 1)">+</button>
+                </div>
+
+                <!-- Team 2 Logo -->
+                <div class="team-logo-container">
+                    <img id="team2-logo"
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f093fb' stroke='%23fff' stroke-width='3'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-family='Arial'%3E⚽%3C/text%3E%3C/svg%3E"
+                        alt="Team 2 Logo" class="team-logo">
+                </div>
+            </div>
+
+            <!-- Team 2 Name (far right) -->
+            <div class="team-name-container team-name-right">
+                <div class="team-name" id="team2-name">VISITANTE</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

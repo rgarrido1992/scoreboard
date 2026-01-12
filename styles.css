@@ -1,0 +1,822 @@
+/* ========================================
+   SCOREBOARD OVERLAY - STYLES
+   ======================================== */
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --dark-bg: #0a0a1a;
+    --card-bg: rgba(20, 20, 40, 0.95);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --success: #00d9a6;
+    --warning: #ffc107;
+    --danger: #ff4757;
+    --score-glow: 0 0 30px rgba(102, 126, 234, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Russo One', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* Overlay Mode */
+body.overlay-mode {
+    background: transparent !important;
+}
+
+body.overlay-mode .control-panel {
+    display: none !important;
+}
+
+body.overlay-mode .scoreboard {
+    background: transparent;
+    padding: 0;
+}
+
+body.overlay-mode .score-btn {
+    display: none !important;
+}
+
+/* ========================================
+   CONTROL PANEL
+   ======================================== */
+
+.control-panel {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.control-panel h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.control-panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.team-control {
+    background: var(--glass-bg);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    min-width: 80px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"] {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+}
+
+.input-group input[type="file"] {
+    flex: 1;
+    padding: 10px;
+    border: 2px dashed var(--glass-border);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.input-group input[type="file"]:hover {
+    border-color: #667eea;
+}
+
+/* Buttons */
+button {
+    font-family: 'Russo One', sans-serif;
+    cursor: pointer;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: var(--glass-bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #00d9a6 0%, #00b894 100%);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 217, 166, 0.4);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: #1a1a2e;
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 193, 7, 0.4);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    color: white;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+}
+
+.btn-overlay {
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    color: white;
+    font-size: 1.1rem;
+    padding: 15px 30px;
+}
+
+.btn-overlay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px rgba(168, 85, 247, 0.5);
+}
+
+/* Team Select Dropdown */
+.team-select {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.team-select:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+}
+
+.team-select option {
+    background: #1a1a2e;
+    color: white;
+    padding: 10px;
+}
+
+/* Apply Section */
+.apply-section {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.btn-apply {
+    background: linear-gradient(135deg, #00d9a6 0%, #00b894 100%);
+    color: white;
+    font-size: 1.3rem;
+    padding: 18px 50px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 217, 166, 0.4);
+    animation: pulse-btn 2s infinite;
+}
+
+.btn-apply:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 35px rgba(0, 217, 166, 0.6);
+}
+
+@keyframes pulse-btn {
+
+    0%,
+    100% {
+        box-shadow: 0 5px 25px rgba(0, 217, 166, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 5px 35px rgba(0, 217, 166, 0.6);
+    }
+}
+
+.timer-controls,
+.match-controls {
+    background: var(--glass-bg);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 20px;
+}
+
+.timer-buttons,
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.instructions {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    margin-top: 20px;
+}
+
+.instructions h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.instructions ol {
+    margin-left: 20px;
+    line-height: 2;
+    color: var(--text-secondary);
+}
+
+.instructions code {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    color: #00d9a6;
+}
+
+/* ========================================
+   SCOREBOARD
+   ======================================== */
+
+.scoreboard {
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(10, 10, 26, 0.9) 0%, rgba(20, 20, 50, 0.9) 100%);
+}
+
+.scoreboard-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg,
+            rgba(30, 30, 60, 0.95) 0%,
+            rgba(20, 20, 45, 0.98) 50%,
+            rgba(30, 30, 60, 0.95) 100%);
+    border-radius: 20px;
+    padding: 15px 30px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(102, 126, 234, 0.2);
+}
+
+.team {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 250px;
+}
+
+.team-left {
+    justify-content: flex-end;
+}
+
+.team-right {
+    justify-content: flex-start;
+}
+
+/* Team Name Container - for new layout */
+.team-name-container {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.team-name-left {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.team-name-right {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* Logo without circular frame */
+.team-logo-container {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* NO border, NO background, NO border-radius */
+}
+
+.team-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Team name - full display */
+.team-name {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+/* Score Section - with logos inside */
+.score-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.score-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.score {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    min-width: 80px;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.score-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.score-btn.plus {
+    background: linear-gradient(135deg, #00d9a6 0%, #00b894 100%);
+    color: white;
+}
+
+.score-btn.plus:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 217, 166, 0.6);
+}
+
+.score-btn.minus {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    color: white;
+}
+
+.score-btn.minus:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+}
+
+/* Timer */
+.timer-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(20, 20, 40, 0.8) 100%);
+    border-radius: 12px;
+    border: 3px solid rgba(0, 217, 166, 0.5);
+    color: #00d9a6;
+    text-shadow: 0 0 15px rgba(0, 217, 166, 0.5);
+    /* FIXED WIDTH - wide enough for all digits */
+    min-width: 130px;
+    width: auto;
+    text-align: center;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 4px;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes scoreFlash {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(0, 217, 166, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(0, 217, 166, 0.8);
+    }
+}
+
+.score.animating {
+    animation: scoreFlash 0.3s ease-out;
+}
+
+.timer-display.running {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* ========================================
+   MOBILE CONTROL PANEL
+   ======================================== */
+
+/* Mobile Quick Controls - Always visible on mobile at top */
+.mobile-quick-controls {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, rgba(20, 20, 50, 0.98) 0%, rgba(30, 30, 60, 0.98) 100%);
+    padding: 15px;
+    border-radius: 0 0 20px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.mobile-score-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.mobile-team-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.mobile-team-score .team-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.mobile-team-score .score-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.mobile-score-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.mobile-score-btns .score-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+}
+
+.mobile-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.mobile-timer .timer-display {
+    font-size: 1.8rem;
+    padding: 8px 15px;
+    width: 120px;
+}
+
+.mobile-timer-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.mobile-timer-buttons button {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE FIRST
+   ======================================== */
+
+@media (max-width: 900px) {
+    .controls-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .scoreboard-inner {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .team {
+        min-width: auto;
+    }
+
+    .team-left,
+    .team-right {
+        justify-content: center;
+    }
+
+    .score-section {
+        flex-direction: row;
+    }
+
+    .score {
+        font-size: 3rem;
+        min-width: 60px;
+    }
+
+    .timer-display {
+        font-size: 1.8rem;
+        width: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Show mobile quick controls */
+    .mobile-quick-controls {
+        display: block;
+    }
+
+    /* Hide instructions on mobile */
+    .instructions {
+        display: none;
+    }
+
+    .control-panel {
+        margin: 0;
+        padding: 15px;
+        border-radius: 0;
+        margin-top: 0;
+    }
+
+    .control-panel h1 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+
+    .control-panel h2 {
+        font-size: 1rem;
+    }
+
+    /* Reorder sections for mobile */
+    .timer-controls {
+        order: -1;
+    }
+
+    .timer-buttons {
+        justify-content: center;
+    }
+
+    .timer-buttons button {
+        flex: 1;
+        padding: 15px 10px;
+    }
+
+    .btn-apply {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+
+    .action-buttons {
+        flex-direction: row;
+    }
+
+    .action-buttons button {
+        flex: 1;
+        padding: 12px 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Also hide scoreboard preview on mobile control panel */
+    body:not(.overlay-mode) .scoreboard {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .control-panel {
+        padding: 10px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group label {
+        min-width: auto;
+        margin-bottom: 5px;
+    }
+
+    .team-select {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+
+    .team-control {
+        padding: 15px;
+    }
+
+    .team-control h2 {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    /* Mobile score controls adjustments */
+    .mobile-score-btns .score-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+
+    .mobile-team-score .score-value {
+        font-size: 2rem;
+    }
+
+    .mobile-timer .timer-display {
+        font-size: 1.5rem;
+        width: 100px;
+    }
+}
+
+/* ========================================
+   OVERLAY MODE - FIXED DIMENSIONS
+   ======================================== */
+
+body.overlay-mode .scoreboard-inner {
+    /* Fixed layout to prevent shifting */
+    width: 100%;
+    max-width: none;
+    justify-content: center;
+    gap: 25px;
+    padding: 12px 30px;
+}
+
+body.overlay-mode .team-name-container {
+    /* Let names show fully */
+    min-width: 150px;
+    flex-shrink: 0;
+}
+
+body.overlay-mode .team-name {
+    /* MUCH LARGER for mobile/stream visibility */
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+body.overlay-mode .team-logo-container {
+    /* Logo size in overlay */
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+}
+
+body.overlay-mode .score {
+    /* Fixed width for scores */
+    width: 60px;
+    font-size: 3.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+body.overlay-mode .score-section {
+    flex-shrink: 0;
+    gap: 15px;
+}
+
+body.overlay-mode .timer-display {
+    /* Larger timer for overlay */
+    min-width: 160px;
+    font-size: 2.2rem;
+    padding: 10px 25px;
+    flex-shrink: 0;
+    letter-spacing: 5px;
+}
