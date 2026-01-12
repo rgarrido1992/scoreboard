@@ -791,6 +791,13 @@ body.overlay-mode .team-name {
     font-size: 1.8rem;
     font-weight: bold;
     letter-spacing: 2px;
+    /* Black border/outline effect */
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 body.overlay-mode .team-logo-container {
