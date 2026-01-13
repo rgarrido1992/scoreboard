@@ -83,6 +83,10 @@ wss.on('connection', (ws) => {
                     } else {
                         currentState.team2.score = message.score;
                     }
+                    // Also update timer if provided (to keep it in sync)
+                    if (message.timer) {
+                        currentState.timer = message.timer;
+                    }
                     broadcast({
                         type: 'sync',
                         state: currentState

@@ -359,10 +359,14 @@ function changeScore(teamNumber, delta) {
         mobileScoreElement.textContent = newScore;
     }
 
-    // Send score update to server
+    // Send score update to server (include timer state to avoid resetting it)
     sendToServer('score', {
         team: teamNumber,
-        score: newScore
+        score: newScore,
+        timer: {
+            seconds: state.timer.seconds,
+            running: state.timer.running
+        }
     });
 }
 
