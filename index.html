@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Orbitron:wght@400;700;900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap"
         rel="stylesheet">
 </head>
 
@@ -137,48 +138,52 @@
         </div>
     </div>
 
-    <!-- Scoreboard Display -->
+    <!-- Scoreboard Display - FIFA Style -->
     <div id="scoreboard" class="scoreboard">
-        <div class="scoreboard-inner">
-            <!-- Team 1 Name (far left) -->
-            <div class="team-name-container team-name-left">
-                <div class="team-name" id="team1-name">LOCAL</div>
+        <div class="scoreboard-wrapper">
+            <!-- Main Scoreboard Bar -->
+            <div class="scoreboard-fifa">
+                <!-- Team 1 Section (Left) -->
+                <div class="team-section team-section-left" id="team1-section">
+                    <div class="team-logo-wrapper">
+                        <img id="team1-logo"
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23667eea' stroke='%23fff' stroke-width='3'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-family='Arial'%3E⚽%3C/text%3E%3C/svg%3E"
+                            alt="Team 1 Logo" class="team-logo">
+                    </div>
+                    <div class="team-name-fifa" id="team1-name">LOCAL</div>
+                    <div class="score-buttons-overlay">
+                        <button class="score-btn minus" onclick="changeScore(1, -1)">−</button>
+                        <button class="score-btn plus" onclick="changeScore(1, 1)">+</button>
+                    </div>
+                </div>
+
+                <!-- Center Section (Score only - trapezoid) -->
+                <div class="center-section">
+                    <div class="score-display">
+                        <span class="score-fifa" id="team1-score">0</span>
+                        <span class="score-separator">-</span>
+                        <span class="score-fifa" id="team2-score">0</span>
+                    </div>
+                </div>
+
+                <!-- Team 2 Section (Right) -->
+                <div class="team-section team-section-right" id="team2-section">
+                    <div class="score-buttons-overlay">
+                        <button class="score-btn minus" onclick="changeScore(2, -1)">−</button>
+                        <button class="score-btn plus" onclick="changeScore(2, 1)">+</button>
+                    </div>
+                    <div class="team-name-fifa" id="team2-name">VISITANTE</div>
+                    <div class="team-logo-wrapper">
+                        <img id="team2-logo"
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f093fb' stroke='%23fff' stroke-width='3'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-family='Arial'%3E⚽%3C/text%3E%3C/svg%3E"
+                            alt="Team 2 Logo" class="team-logo">
+                    </div>
+                </div>
             </div>
 
-            <!-- Center Score Section: Logo1 - Score1 - Timer - Score2 - Logo2 -->
-            <div class="score-section">
-                <!-- Team 1 Logo + Score -->
-                <div class="team-logo-container">
-                    <img id="team1-logo"
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23667eea' stroke='%23fff' stroke-width='3'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-family='Arial'%3E⚽%3C/text%3E%3C/svg%3E"
-                        alt="Team 1 Logo" class="team-logo">
-                </div>
-
-                <div class="score-container">
-                    <button class="score-btn minus" onclick="changeScore(1, -1)">−</button>
-                    <div class="score" id="team1-score">0</div>
-                    <button class="score-btn plus" onclick="changeScore(1, 1)">+</button>
-                </div>
-
-                <div class="timer-display" id="timer">00:00</div>
-
-                <div class="score-container">
-                    <button class="score-btn minus" onclick="changeScore(2, -1)">−</button>
-                    <div class="score" id="team2-score">0</div>
-                    <button class="score-btn plus" onclick="changeScore(2, 1)">+</button>
-                </div>
-
-                <!-- Team 2 Logo -->
-                <div class="team-logo-container">
-                    <img id="team2-logo"
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f093fb' stroke='%23fff' stroke-width='3'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-family='Arial'%3E⚽%3C/text%3E%3C/svg%3E"
-                        alt="Team 2 Logo" class="team-logo">
-                </div>
-            </div>
-
-            <!-- Team 2 Name (far right) -->
-            <div class="team-name-container team-name-right">
-                <div class="team-name" id="team2-name">VISITANTE</div>
+            <!-- Timer Trapezoid (below main bar) -->
+            <div class="timer-trapezoid">
+                <div class="timer-fifa" id="timer">00:00</div>
             </div>
         </div>
     </div>

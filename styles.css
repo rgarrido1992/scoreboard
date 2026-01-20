@@ -1,20 +1,57 @@
 /* ========================================
-   SCOREBOARD OVERLAY - STYLES
+   SCOREBOARD OVERLAY - MODERN REDESIGN
+   Fresh, Premium, Glassmorphism Design
    ======================================== */
 
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --dark-bg: #0a0a1a;
-    --card-bg: rgba(20, 20, 40, 0.95);
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    /* Modern Color Palette */
+    --bg-dark: #0a0a12;
+    --bg-card: rgba(15, 15, 25, 0.85);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-bg-hover: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-light: rgba(255, 255, 255, 0.15);
+
+    /* Text Colors */
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --success: #00d9a6;
-    --warning: #ffc107;
-    --danger: #ff4757;
-    --score-glow: 0 0 30px rgba(102, 126, 234, 0.5);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-muted: rgba(255, 255, 255, 0.4);
+
+    /* Accent Colors */
+    --accent-primary: #6366f1;
+    --accent-secondary: #8b5cf6;
+    --accent-glow: rgba(99, 102, 241, 0.4);
+    --success: #10b981;
+    --success-glow: rgba(16, 185, 129, 0.4);
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --danger-glow: rgba(239, 68, 68, 0.4);
+
+    /* Timer Colors */
+    --timer-bg: rgba(0, 0, 0, 0.5);
+    --timer-border: rgba(16, 185, 129, 0.6);
+    --timer-text: #10b981;
+    --timer-glow: rgba(16, 185, 129, 0.5);
+
+    /* Scoreboard Center */
+    --center-bg: #12121a;
+
+    /* Font Families */
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-score: 'Bebas Neue', 'Orbitron', sans-serif;
+    --font-timer: 'Orbitron', monospace;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 40px var(--accent-glow);
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
 }
 
 * {
@@ -24,18 +61,23 @@
 }
 
 body {
-    font-family: 'Russo One', sans-serif;
-    background: var(--dark-bg);
+    font-family: var(--font-ui);
+    background: var(--bg-dark);
     color: var(--text-primary);
     min-height: 100vh;
+    line-height: 1.5;
 }
 
-/* Overlay Mode */
+/* ========================================
+   OVERLAY MODE
+   ======================================== */
+
 body.overlay-mode {
     background: transparent !important;
 }
 
-body.overlay-mode .control-panel {
+body.overlay-mode .control-panel,
+body.overlay-mode .mobile-quick-controls {
     display: none !important;
 }
 
@@ -55,115 +97,150 @@ body.overlay-mode .score-btn {
 .control-panel {
     max-width: 900px;
     margin: 0 auto;
-    padding: 30px;
-    background: var(--card-bg);
-    border-radius: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    padding: 32px;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-xl);
+    margin-top: 32px;
+    margin-bottom: 32px;
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-lg);
 }
 
 .control-panel h1 {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    background: var(--primary-gradient);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 .control-panel h2 {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 16px;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.1em;
 }
 
 .controls-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: 24px;
+    margin-bottom: 24px;
 }
 
 .team-control {
     background: var(--glass-bg);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 24px;
+    border-radius: var(--radius-lg);
     border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.team-control:hover {
+    background: var(--glass-bg-hover);
+    border-color: var(--glass-border-light);
 }
 
 .input-group {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .input-group label {
-    min-width: 80px;
+    min-width: 70px;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .input-group input[type="text"],
 .input-group input[type="number"] {
     flex: 1;
-    padding: 12px 15px;
+    padding: 12px 16px;
     border: none;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.06);
     color: var(--text-primary);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    font-family: var(--font-ui);
+    font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
 }
 
 .input-group input:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-.input-group input[type="file"] {
+/* Team Select Dropdown */
+.team-select {
     flex: 1;
-    padding: 10px;
-    border: 2px dashed var(--glass-border);
-    border-radius: 10px;
-    background: transparent;
-    color: var(--text-secondary);
+    padding: 12px 16px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 0.9375rem;
     cursor: pointer;
-    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 44px;
 }
 
-.input-group input[type="file"]:hover {
-    border-color: #667eea;
+.team-select:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
-/* Buttons */
+.team-select option {
+    background: #1a1a2e;
+    color: white;
+    padding: 12px;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
 button {
-    font-family: 'Russo One', sans-serif;
+    font-family: var(--font-ui);
     cursor: pointer;
     border: none;
     padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.05em;
 }
 
 .btn-primary {
-    background: var(--primary-gradient);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: white;
+    box-shadow: 0 4px 12px var(--accent-glow);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px var(--accent-glow);
 }
 
 .btn-secondary {
@@ -173,144 +250,131 @@ button {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg-hover);
     color: white;
+    border-color: var(--glass-border-light);
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #00d9a6 0%, #00b894 100%);
+    background: linear-gradient(135deg, var(--success), #059669);
     color: white;
+    box-shadow: 0 4px 12px var(--success-glow);
 }
 
 .btn-success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 217, 166, 0.4);
+    box-shadow: 0 6px 20px var(--success-glow);
 }
 
 .btn-warning {
-    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    background: linear-gradient(135deg, var(--warning), #d97706);
     color: #1a1a2e;
 }
 
 .btn-warning:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(255, 193, 7, 0.4);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    background: linear-gradient(135deg, var(--danger), #dc2626);
     color: white;
+    box-shadow: 0 4px 12px var(--danger-glow);
 }
 
 .btn-danger:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+    box-shadow: 0 6px 20px var(--danger-glow);
 }
 
 .btn-overlay {
-    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    background: linear-gradient(135deg, #a855f7, var(--accent-primary));
     color: white;
-    font-size: 1.1rem;
-    padding: 15px 30px;
+    font-size: 1rem;
+    padding: 16px 32px;
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.4);
 }
 
 .btn-overlay:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 25px rgba(168, 85, 247, 0.5);
+    box-shadow: 0 8px 28px rgba(168, 85, 247, 0.5);
 }
 
-/* Team Select Dropdown */
-.team-select {
-    flex: 1;
-    padding: 12px 15px;
-    border: none;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 15px center;
-    padding-right: 40px;
-}
-
-.team-select:focus {
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
-}
-
-.team-select option {
-    background: #1a1a2e;
-    color: white;
-    padding: 10px;
-}
-
-/* Apply Section */
+/* Apply Button */
 .apply-section {
     text-align: center;
-    margin: 25px 0;
+    margin: 28px 0;
 }
 
 .btn-apply {
-    background: linear-gradient(135deg, #00d9a6 0%, #00b894 100%);
+    background: linear-gradient(135deg, var(--success), #059669);
     color: white;
-    font-size: 1.3rem;
-    padding: 18px 50px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0, 217, 166, 0.4);
-    animation: pulse-btn 2s infinite;
+    font-size: 1.125rem;
+    padding: 18px 56px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 6px 24px var(--success-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-apply::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
 
 .btn-apply:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 35px rgba(0, 217, 166, 0.6);
+    box-shadow: 0 10px 36px var(--success-glow);
 }
 
-@keyframes pulse-btn {
-
-    0%,
-    100% {
-        box-shadow: 0 5px 25px rgba(0, 217, 166, 0.4);
-    }
-
-    50% {
-        box-shadow: 0 5px 35px rgba(0, 217, 166, 0.6);
-    }
-}
-
+/* Timer & Match Controls */
 .timer-controls,
 .match-controls {
     background: var(--glass-bg);
-    padding: 20px;
-    border-radius: 15px;
+    padding: 24px;
+    border-radius: var(--radius-lg);
     border: 1px solid var(--glass-border);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .timer-buttons,
 .action-buttons {
     display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
+/* Instructions */
 .instructions {
-    background: rgba(102, 126, 234, 0.1);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    margin-top: 20px;
+    background: rgba(99, 102, 241, 0.08);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    margin-top: 24px;
 }
 
 .instructions h3 {
-    color: #667eea;
-    margin-bottom: 15px;
+    color: var(--accent-primary);
+    margin-bottom: 16px;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .instructions ol {
@@ -320,179 +384,302 @@ button {
 }
 
 .instructions code {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-family: 'Courier New', monospace;
-    color: #00d9a6;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.85rem;
+    color: var(--success);
 }
 
 /* ========================================
-   SCOREBOARD
+   SCOREBOARD - FIFA / CHAMPIONS LEAGUE STYLE
+   EXACT DIMENSIONS FROM REFERENCE
    ======================================== */
 
 .scoreboard {
     padding: 20px;
-    background: linear-gradient(180deg, rgba(10, 10, 26, 0.9) 0%, rgba(20, 20, 50, 0.9) 100%);
+    padding-top: 56px;
+    /* 56px floating space above */
+    background: transparent;
 }
 
-.scoreboard-inner {
+body:not(.overlay-mode) .scoreboard {
+    background: linear-gradient(180deg, rgba(10, 10, 18, 0.95) 0%, rgba(15, 15, 30, 0.95) 100%);
+    padding-top: 20px;
+    /* Normal padding for control panel */
+}
+
+/* Wrapper to center and contain the scoreboard */
+.scoreboard-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
+    width: 926px;
     margin: 0 auto;
-    background: linear-gradient(135deg,
-            rgba(30, 30, 60, 0.95) 0%,
-            rgba(20, 20, 45, 0.98) 50%,
-            rgba(30, 30, 60, 0.95) 100%);
-    border-radius: 20px;
-    padding: 15px 30px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 60px rgba(102, 126, 234, 0.2);
 }
 
-.team {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    min-width: 250px;
-}
-
-.team-left {
-    justify-content: flex-end;
-}
-
-.team-right {
-    justify-content: flex-start;
-}
-
-/* Team Name Container - for new layout */
-.team-name-container {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.team-name-left {
-    justify-content: flex-end;
-    text-align: right;
-}
-
-.team-name-right {
-    justify-content: flex-start;
-    text-align: left;
-}
-
-/* Logo without circular frame */
-.team-logo-container {
-    width: 55px;
-    height: 55px;
+/* Main FIFA Scoreboard Container - 926px x 112px */
+.scoreboard-fifa {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 926px;
+    height: 112px;
+    position: relative;
+}
+
+/* Team Sections */
+.team-section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* Left team section - border 10px on LEFT */
+.team-section-left {
+    background: linear-gradient(135deg, #1a2e5c 0%, #0d1b2a 100%);
+    padding: 0;
+    border-radius: 8px 0 0 8px;
+    border-left: 10px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Right team section - border 10px on RIGHT */
+.team-section-right {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a2e5c 100%);
+    padding: 0;
+    border-radius: 0 8px 8px 0;
+    border-right: 10px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Team Logo Wrapper - 95px max size
+   Center at 397px from overlay center
+   Overlay center = 463px, so:
+   - Left logo center: 463 - 397 = 66px from left edge
+   - Right logo center: 463 + 397 = 860px from left = 66px from right edge */
+.team-logo-wrapper {
+    width: 95px;
+    height: 95px;
     flex-shrink: 0;
-    /* NO border, NO background, NO border-radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+/* Position logos at fixed distance from edges */
+.team-section-left .team-logo-wrapper {
+    position: absolute;
+    left: 10.5px;
+    /* 58px - 47.5px (half of 95px) = 10.5px to center logo at 58px */
+}
+
+.team-section-right .team-logo-wrapper {
+    position: absolute;
+    right: 10.5px;
+    /* 58px - 47.5px = 10.5px to center logo at 58px */
 }
 
 .team-logo {
-    width: 100%;
-    height: 100%;
+    width: 95px;
+    height: 95px;
     object-fit: contain;
 }
 
-/* Team name - full display */
-.team-name {
-    font-size: 1.3rem;
+/* Team Name - FIFA Style (Abbreviations)
+   Height: 46px (font-size)
+   Center at 214px from overlay center
+   Overlay center = 463px, so:
+   - Left text center: 463 - 214 = 249px from left edge
+   - Right text center: 463 + 214 = 677px from left = 249px from right edge */
+.team-name-fifa {
+    font-family: var(--font-ui);
+    font-size: 64px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.05em;
+    color: #ffffff;
     white-space: nowrap;
-    font-weight: bold;
+    line-height: 1;
+    position: absolute;
 }
 
-/* Score Section - with logos inside */
-.score-section {
+/* Position text at 249px from edges (center of text at 214px from overlay center) */
+.team-section-left .team-name-fifa {
+    left: 249px;
+    transform: translateX(-50%);
+}
+
+.team-section-right .team-name-fifa {
+    right: 249px;
+    transform: translateX(50%);
+}
+
+/* Score Buttons Overlay (only visible in control mode) */
+.score-buttons-overlay {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    position: absolute;
+}
+
+.team-section-left .score-buttons-overlay {
+    right: 30px;
+}
+
+.team-section-right .score-buttons-overlay {
+    left: 150px;
+}
+
+body.overlay-mode .score-buttons-overlay {
+    display: none !important;
+}
+
+/* Center Section - Score Trapezoid
+   Top width: 242px (121px from center each side)
+   Bottom width: 140px (70px from center each side)
+   Background: gradient from #031a44 to #1f63a4 */
+.center-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 242px;
+    height: 100%;
+    background: linear-gradient(90deg, #031a44 0%, #1f63a4 100%);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    /* Trapezoid shape: top 242px wide, bottom 140px wide */
+    clip-path: polygon(0 0,
+            100% 0,
+            calc(50% + 70px) 100%,
+            calc(50% - 70px) 100%);
+}
+
+/* Score Display */
+.score-display {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    gap: 10px;
 }
 
-.score-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.score {
-    font-family: 'Orbitron', sans-serif;
+.score-fifa {
+    font-family: var(--font-score);
     font-size: 4rem;
-    font-weight: 900;
-    min-width: 80px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1;
+    min-width: 50px;
     text-align: center;
-    background: linear-gradient(180deg, #ffffff 0%, #a0a0a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
+.score-separator {
+    font-family: var(--font-score);
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1;
+}
+
+/* Timer Trapezoid Container (below main bar)
+   Top width: 278px (139px from center each side)
+   Bottom width: 232px (116px from center each side)
+   Height: 49px */
+.timer-trapezoid {
+    width: 278px;
+    height: 49px;
+    background: linear-gradient(90deg, #1f63a4 0%, #031a44 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2px;
+    /* Trapezoid shape: top 278px wide, bottom 232px wide */
+    clip-path: polygon(calc(50% - 139px) 0,
+            calc(50% + 139px) 0,
+            calc(50% + 116px) 100%,
+            calc(50% - 116px) 100%);
+    position: relative;
+    z-index: 2;
+}
+
+/* Timer text inside trapezoid - same font as score */
+.timer-fifa {
+    font-family: var(--font-score);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+}
+
+/* Score Buttons */
 .score-btn {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 600;
     padding: 0;
     transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .score-btn.plus {
-    background: linear-gradient(135deg, #00d9a6 0%, #00b894 100%);
+    background: linear-gradient(135deg, var(--success), #059669);
     color: white;
+    box-shadow: 0 4px 12px var(--success-glow);
 }
 
 .score-btn.plus:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 217, 166, 0.6);
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px var(--success-glow);
 }
 
 .score-btn.minus {
-    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    background: linear-gradient(135deg, var(--danger), #dc2626);
     color: white;
+    box-shadow: 0 4px 12px var(--danger-glow);
 }
 
 .score-btn.minus:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px var(--danger-glow);
 }
 
-/* Timer */
+/* Legacy classes for compatibility */
 .timer-display {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
+    font-family: var(--font-timer);
+    font-size: 2.25rem;
     font-weight: 700;
-    padding: 12px 20px;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(20, 20, 40, 0.8) 100%);
-    border-radius: 12px;
-    border: 3px solid rgba(0, 217, 166, 0.5);
-    color: #00d9a6;
-    text-shadow: 0 0 15px rgba(0, 217, 166, 0.5);
-    /* FIXED WIDTH - wide enough for all digits */
-    min-width: 130px;
-    width: auto;
+    padding: 14px 28px;
+    background: var(--timer-bg);
+    border-radius: 100px;
+    border: 2px solid var(--timer-border);
+    color: var(--timer-text);
+    text-shadow: 0 0 20px var(--timer-glow);
+    min-width: 150px;
     text-align: center;
-    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(16, 185, 129, 0.15);
     font-variant-numeric: tabular-nums;
     letter-spacing: 4px;
+    transition: all 0.3s ease;
 }
 
 /* ========================================
@@ -507,46 +694,52 @@ button {
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.15);
     }
 }
 
-@keyframes glow {
+@keyframes timerGlow {
 
     0%,
     100% {
-        box-shadow: 0 0 20px rgba(0, 217, 166, 0.5);
+        box-shadow:
+            inset 0 2px 8px rgba(0, 0, 0, 0.4),
+            0 0 30px rgba(16, 185, 129, 0.2);
+        border-color: rgba(16, 185, 129, 0.6);
     }
 
     50% {
-        box-shadow: 0 0 40px rgba(0, 217, 166, 0.8);
+        box-shadow:
+            inset 0 2px 8px rgba(0, 0, 0, 0.4),
+            0 0 50px rgba(16, 185, 129, 0.5);
+        border-color: rgba(16, 185, 129, 1);
     }
 }
 
 .score.animating {
-    animation: scoreFlash 0.3s ease-out;
+    animation: scoreFlash 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .timer-display.running {
-    animation: glow 2s ease-in-out infinite;
+    animation: timerGlow 2s ease-in-out infinite;
 }
 
 /* ========================================
-   MOBILE CONTROL PANEL
+   MOBILE QUICK CONTROLS
    ======================================== */
 
-/* Mobile Quick Controls - Always visible on mobile at top */
 .mobile-quick-controls {
     display: none;
     position: sticky;
     top: 0;
     z-index: 100;
-    background: linear-gradient(135deg, rgba(20, 20, 50, 0.98) 0%, rgba(30, 30, 60, 0.98) 100%);
-    padding: 15px;
-    border-radius: 0 0 20px 20px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    padding: 16px;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    border: 1px solid var(--glass-border);
     border-top: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-lg);
     margin-bottom: 20px;
 }
 
@@ -554,8 +747,8 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 0;
 }
 
 .mobile-team-score {
@@ -567,9 +760,10 @@ button {
 
 .mobile-team-score .team-label {
     font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.05em;
     max-width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -578,35 +772,36 @@ button {
 }
 
 .mobile-team-score .score-value {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 900;
+    font-family: var(--font-score);
+    font-size: 2.75rem;
+    font-weight: 400;
     color: white;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    line-height: 1;
 }
 
 .mobile-score-btns {
     display: flex;
-    gap: 8px;
+    gap: 10px;
 }
 
 .mobile-score-btns .score-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 1.8rem;
+    width: 52px;
+    height: 52px;
+    font-size: 1.75rem;
 }
 
 .mobile-timer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .mobile-timer .timer-display {
-    font-size: 1.8rem;
-    padding: 8px 15px;
-    width: 120px;
+    font-size: 1.75rem;
+    padding: 10px 18px;
+    min-width: 120px;
 }
 
 .mobile-timer-buttons {
@@ -615,12 +810,12 @@ button {
 }
 
 .mobile-timer-buttons button {
-    padding: 10px 15px;
+    padding: 10px 16px;
     font-size: 0.8rem;
 }
 
 /* ========================================
-   RESPONSIVE - MOBILE FIRST
+   RESPONSIVE DESIGN
    ======================================== */
 
 @media (max-width: 900px) {
@@ -630,62 +825,51 @@ button {
 
     .scoreboard-inner {
         flex-direction: column;
-        padding: 20px;
+        padding: 24px;
+        gap: 16px;
     }
 
-    .team {
+    .team-name-container {
         min-width: auto;
     }
 
-    .team-left,
-    .team-right {
+    .team-name-left,
+    .team-name-right {
         justify-content: center;
-    }
-
-    .score-section {
-        flex-direction: row;
+        text-align: center;
     }
 
     .score {
-        font-size: 3rem;
+        font-size: 3.5rem;
         min-width: 60px;
     }
 
     .timer-display {
-        font-size: 1.8rem;
-        width: 130px;
+        font-size: 1.75rem;
+        min-width: 130px;
     }
 }
 
 @media (max-width: 768px) {
-
-    /* Show mobile quick controls */
     .mobile-quick-controls {
         display: block;
     }
 
-    /* Hide instructions on mobile */
     .instructions {
         display: none;
     }
 
     .control-panel {
         margin: 0;
-        padding: 15px;
+        padding: 20px;
         border-radius: 0;
-        margin-top: 0;
     }
 
     .control-panel h1 {
         font-size: 1.4rem;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
 
-    .control-panel h2 {
-        font-size: 1rem;
-    }
-
-    /* Reorder sections for mobile */
     .timer-controls {
         order: -1;
     }
@@ -696,13 +880,13 @@ button {
 
     .timer-buttons button {
         flex: 1;
-        padding: 15px 10px;
+        padding: 14px 12px;
     }
 
     .btn-apply {
         width: 100%;
-        font-size: 1.1rem;
-        padding: 15px;
+        font-size: 1rem;
+        padding: 16px;
     }
 
     .action-buttons {
@@ -711,11 +895,10 @@ button {
 
     .action-buttons button {
         flex: 1;
-        padding: 12px 10px;
-        font-size: 0.85rem;
+        padding: 14px 10px;
+        font-size: 0.8rem;
     }
 
-    /* Also hide scoreboard preview on mobile control panel */
     body:not(.overlay-mode) .scoreboard {
         display: none;
     }
@@ -723,7 +906,7 @@ button {
 
 @media (max-width: 500px) {
     .control-panel {
-        padding: 10px;
+        padding: 16px;
     }
 
     .input-group {
@@ -733,97 +916,85 @@ button {
 
     .input-group label {
         min-width: auto;
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
 
     .team-select {
-        font-size: 0.9rem;
-        padding: 10px 12px;
+        font-size: 0.875rem;
+        padding: 12px 14px;
     }
 
     .team-control {
-        padding: 15px;
+        padding: 20px;
     }
 
-    .team-control h2 {
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-    }
-
-    /* Mobile score controls adjustments */
     .mobile-score-btns .score-btn {
-        width: 45px;
-        height: 45px;
+        width: 48px;
+        height: 48px;
         font-size: 1.5rem;
     }
 
     .mobile-team-score .score-value {
-        font-size: 2rem;
+        font-size: 2.25rem;
     }
 
     .mobile-timer .timer-display {
         font-size: 1.5rem;
-        width: 100px;
+        min-width: 100px;
     }
 }
 
 /* ========================================
-   OVERLAY MODE - FIXED DIMENSIONS
+   OVERLAY MODE - OPTIMIZED FOR OBS
    ======================================== */
 
 body.overlay-mode .scoreboard-inner {
-    /* Fixed layout to prevent shifting */
     width: 100%;
     max-width: none;
     justify-content: center;
-    gap: 25px;
-    padding: 12px 30px;
+    gap: 28px;
+    padding: 14px 40px;
+    border-radius: 16px;
 }
 
 body.overlay-mode .team-name-container {
-    /* Let names show fully */
-    min-width: 150px;
+    min-width: 180px;
     flex-shrink: 0;
 }
 
 body.overlay-mode .team-name {
-    /* MUCH LARGER for mobile/stream visibility */
-    font-size: 1.8rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    /* Black border/outline effect */
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-shadow:
         -2px -2px 0 #000,
         2px -2px 0 #000,
         -2px 2px 0 #000,
         2px 2px 0 #000,
-        0 0 10px rgba(0, 0, 0, 0.8);
+        0 0 20px rgba(0, 0, 0, 0.9);
 }
 
 body.overlay-mode .team-logo-container {
-    /* Logo size in overlay */
-    width: 55px;
-    height: 55px;
+    width: 65px;
+    height: 65px;
     flex-shrink: 0;
 }
 
 body.overlay-mode .score {
-    /* Fixed width for scores */
-    width: 60px;
-    font-size: 3.5rem;
+    width: 70px;
+    font-size: 5rem;
     font-variant-numeric: tabular-nums;
 }
 
 body.overlay-mode .score-section {
     flex-shrink: 0;
-    gap: 15px;
+    gap: 18px;
 }
 
 body.overlay-mode .timer-display {
-    /* Larger timer for overlay */
-    min-width: 160px;
-    font-size: 2.2rem;
-    padding: 10px 25px;
+    min-width: 170px;
+    font-size: 2.5rem;
+    padding: 12px 30px;
     flex-shrink: 0;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
 }

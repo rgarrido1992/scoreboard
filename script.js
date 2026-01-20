@@ -11,53 +11,83 @@
 const teams = {
     'ARCANGELES': {
         name: 'ARCÁNGELES',
+        shortName: 'ARC',
         logo: 'img/ARCANGELES_ESCUDO.png',
-        color: '#FFFFFF'
+        color: '#000000',
+        secondaryColor: '#FFFFFF',
+        textColor: '#FFFFFF'
     },
     'BLACKPANTHERS': {
         name: 'BLACK PANTHERS',
+        shortName: 'BPN',
         logo: 'img/escudo_black_panthers.png',
-        color: '#030316'
+        color: '#0f072b',
+        secondaryColor: '#9b85e4',
+        textColor: '#9b85e4'
     },
     'BRICKSBROTHERS': {
         name: 'BRICKS BROTHERS',
+        shortName: 'BBT',
         logo: 'img/BRICKSBROTHERS_ESCUDO.png',
-        color: '#dddddd'
+        color: '#DDDDDD',
+        secondaryColor: '#000000',
+        textColor: '#000000'
     },
     'EQUIPOA': {
         name: 'EQUIPO A',
+        shortName: 'EQA',
         logo: 'img/EQUIPOA_ESCUDO.png',
-        color: '#d21036'
+        color: '#d21036',
+        secondaryColor: '#0e1c52',
+        textColor: '#0e1c52'
     },
     'FILOSOFOSOLIMPICOS': {
         name: 'FILÓSOFOS OLÍMPICOS',
+        shortName: 'FOL',
         logo: 'img/FILOSOFOSOLIMPICOS_ESCUDO.png',
-        color: '#eed000'
+        color: '#eed000',
+        secondaryColor: '#005cb5',
+        textColor: '#005cb5'
     },
     'GRANAUDITORIO': {
         name: 'GRAN AUDITORIO',
+        shortName: 'GAU',
         logo: 'img/GRANAUDITORIO_ESCUDO.png',
-        color: '#101010'
+        color: '#1b1b1b',
+        secondaryColor: '#ff001e',
+        textColor: '#FFFFFF'
     },
     'MANDARINAALFA': {
         name: 'MANDARINA ALFA',
+        shortName: 'MNA',
         logo: 'img/MANDARINAALFA_ESCUDO.png',
-        color: '#101010'
+        color: '#000000',
+        secondaryColor: '#ff6600',
+        textColor: '#FF6600'
     },
     'REALSPORTICO': {
         name: 'REAL SPÓRTICO',
+        shortName: 'RSP',
         logo: 'img/REALSPORTICO_ESCUDO.png',
-        color: '#ffffff'
+        color: '#ffffff',
+        secondaryColor: '#2f1b7a',
+        textColor: '#2f1b7a'
     },
     'THEKINGDOM': {
         name: 'THE KINGDOM',
+        shortName: 'KDM',
         logo: 'img/THEKINGDOM_ESCUDO.png',
-        color: '#006260'
+        color: '#005a59',
+        secondaryColor: '#ffaf08',
+        textColor: '#ffaf08'
     },
     'TITISTEAM': {
         name: 'TITIS TEAM',
+        shortName: 'TTM',
         logo: 'img/TITISTEAM_ESCUDO.png',
-        color: '#09bddf'
+        color: '#00ccf7',
+        secondaryColor: '#FFFFFF',
+        textColor: '#FFFFFF'
     }
 };
 
@@ -162,10 +192,13 @@ function syncFromServer(serverState) {
         state.team1.score = serverState.team1.score || 0;
         state.team1.logo = serverState.team1.logo;
 
-        document.getElementById('team1-name').textContent = state.team1.name;
+        // Use shortName for overlay display, full name otherwise
+        const team1Data = state.team1.key && teams[state.team1.key] ? teams[state.team1.key] : null;
+        const displayName = team1Data?.shortName || state.team1.name;
+        document.getElementById('team1-name').textContent = displayName;
         document.getElementById('team1-score').textContent = state.team1.score;
 
-        // Update mobile elements
+        // Update mobile elements (use full name)
         const mobileTeam1Name = document.getElementById('mobile-team1-name');
         const mobileTeam1Score = document.getElementById('mobile-team1-score');
         if (mobileTeam1Name) mobileTeam1Name.textContent = state.team1.name;
@@ -190,10 +223,13 @@ function syncFromServer(serverState) {
         state.team2.score = serverState.team2.score || 0;
         state.team2.logo = serverState.team2.logo;
 
-        document.getElementById('team2-name').textContent = state.team2.name;
+        // Use shortName for overlay display, full name otherwise
+        const team2Data = state.team2.key && teams[state.team2.key] ? teams[state.team2.key] : null;
+        const displayName2 = team2Data?.shortName || state.team2.name;
+        document.getElementById('team2-name').textContent = displayName2;
         document.getElementById('team2-score').textContent = state.team2.score;
 
-        // Update mobile elements
+        // Update mobile elements (use full name)
         const mobileTeam2Name = document.getElementById('mobile-team2-name');
         const mobileTeam2Score = document.getElementById('mobile-team2-score');
         if (mobileTeam2Name) mobileTeam2Name.textContent = state.team2.name;
@@ -225,33 +261,84 @@ function syncFromServer(serverState) {
         }
     }
 
-    // Update gradient background based on team colors
-    updateGradientBackground();
+    // Update team colors (FIFA style)
+    updateTeamColors();
 }
 
 // ========================================
-// GRADIENT BACKGROUND
+// TEAM COLORS - FIFA STYLE
 // ========================================
 
-function updateGradientBackground() {
-    const scoreboardInner = document.querySelector('.scoreboard-inner');
-    if (!scoreboardInner) return;
+function updateTeamColors() {
+    const team1Section = document.getElementById('team1-section');
+    const team2Section = document.getElementById('team2-section');
+    const team1Name = document.getElementById('team1-name');
+    const team2Name = document.getElementById('team2-name');
 
-    // Get team colors (default to center color if no team selected)
-    const centerColor = '#24243F';
-    let team1Color = centerColor;
-    let team2Color = centerColor;
+    // Apply Team 1 colors (Local - border on LEFT side)
+    if (team1Section && state.team1.key && teams[state.team1.key]) {
+        const team = teams[state.team1.key];
+        const primaryColor = team.color;
+        const secondaryColor = team.secondaryColor || primaryColor;
+        const textColor = team.textColor || '#ffffff';
 
-    if (state.team1.key && teams[state.team1.key]) {
-        team1Color = teams[state.team1.key].color;
+        // Create gradient background with primary color
+        team1Section.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${darkenColor(primaryColor, 20)} 100%)`;
+        team1Section.style.borderLeftColor = secondaryColor;
+        team1Section.style.borderLeftWidth = '10px';
+        team1Section.style.borderLeftStyle = 'solid';
+
+        // Apply text color
+        if (team1Name) {
+            team1Name.style.color = textColor;
+        }
+    } else if (team1Section) {
+        // Reset to default
+        team1Section.style.background = 'linear-gradient(135deg, #1a2e5c 0%, #0d1b2a 100%)';
+        team1Section.style.borderLeftColor = 'rgba(255, 255, 255, 0.2)';
+        if (team1Name) team1Name.style.color = '#ffffff';
     }
-    if (state.team2.key && teams[state.team2.key]) {
-        team2Color = teams[state.team2.key].color;
-    }
 
-    // Apply gradient: team1 color -> center -> team2 color
-    const gradient = `linear-gradient(90deg, ${team1Color} 0%, ${centerColor} 30%, ${centerColor} 70%, ${team2Color} 100%)`;
-    scoreboardInner.style.background = gradient;
+    // Apply Team 2 colors (Visitante - border on RIGHT side)
+    if (team2Section && state.team2.key && teams[state.team2.key]) {
+        const team = teams[state.team2.key];
+        const primaryColor = team.color;
+        const secondaryColor = team.secondaryColor || primaryColor;
+        const textColor = team.textColor || '#ffffff';
+
+        // Create gradient background with primary color
+        team2Section.style.background = `linear-gradient(135deg, ${darkenColor(primaryColor, 20)} 0%, ${primaryColor} 100%)`;
+        team2Section.style.borderRightColor = secondaryColor;
+        team2Section.style.borderRightWidth = '10px';
+        team2Section.style.borderRightStyle = 'solid';
+
+        // Apply text color
+        if (team2Name) {
+            team2Name.style.color = textColor;
+        }
+    } else if (team2Section) {
+        // Reset to default
+        team2Section.style.background = 'linear-gradient(135deg, #0d1b2a 0%, #1a2e5c 100%)';
+        team2Section.style.borderRightColor = 'rgba(255, 255, 255, 0.2)';
+        if (team2Name) team2Name.style.color = '#ffffff';
+    }
+}
+
+// Helper: Darken a hex color
+function darkenColor(hex, percent) {
+    let h = hex.replace('#', '');
+    if (h.length === 3) {
+        h = h.split('').map(c => c + c).join('');
+    }
+    let r = parseInt(h.substring(0, 2), 16);
+    let g = parseInt(h.substring(2, 4), 16);
+    let b = parseInt(h.substring(4, 6), 16);
+
+    r = Math.max(0, Math.floor(r * (100 - percent) / 100));
+    g = Math.max(0, Math.floor(g * (100 - percent) / 100));
+    b = Math.max(0, Math.floor(b * (100 - percent) / 100));
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 // ========================================
